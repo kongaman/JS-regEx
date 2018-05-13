@@ -1,11 +1,11 @@
-let re;
-re = /hello/;
-re = /hello/i; // i = case insensitive
+// let re;
+// re = /hello/;
+// re = /hello/i; // i = case insensitive
 // re = /hello/g; // g = global search (searches for all instances of the regex)
-console.log(re);
-console.log(re.source);
+// console.log(re);
+// console.log(re.source);
 
-// Functions for regular expression in JS
+// ------------ Functions for regular expression in JS ----------------
 
 // exec() - Return Result in an array (match) or null
 // ******
@@ -37,3 +37,39 @@ console.log(re.source);
 // const str = 'Hello there';
 // const newStr = str.replace(re, 'Hi');
 // console.log(newStr);
+
+// --------------- Metacharacters --------------------
+
+let re;
+// Literal Characters
+re = /hello/;
+re = /hello/i;
+
+// MetaCharacter Symbols
+re = /^h/i; // ^ = must begin with
+re = /rld$/i; // $ = must end with
+re = /^hello$/i; // must begin AND end with
+re = /h.llo/i; // . = matches any ONE Character
+re = /h*llo/i; // * = matches any Character 0 or more times
+re = /gra?e?y/i; // ? = optional Character (entweder der eine oder der andere ODER KEINER!!!!)
+re = /gra?e?y\?/i; // \ = escape Character 
+
+
+//String to match
+//const str = 'Hello World';
+//const str = 'grey';
+const str = 'grey?';
+// Log results
+const result = re.exec(str);
+console.log(result);
+
+function reTest(re, str) {
+    if (re.test(str)) {
+        console.log(`${str} matched ${re.source}`);
+    } else {
+        console.log(`${str} does NOT match ${re.source}`);
+    }
+}
+
+reTest(re, str);
+
