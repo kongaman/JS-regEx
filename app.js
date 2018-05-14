@@ -40,25 +40,83 @@
 
 // --------------- Metacharacters --------------------
 
-let re;
+// let re;
 // Literal Characters
-re = /hello/;
-re = /hello/i;
+// re = /hello/;
+// re = /hello/i;
 
 // MetaCharacter Symbols
-re = /^h/i; // ^ = must begin with
-re = /rld$/i; // $ = must end with
-re = /^hello$/i; // must begin AND end with
-re = /h.llo/i; // . = matches any ONE Character
-re = /h*llo/i; // * = matches any Character 0 or more times
-re = /gra?e?y/i; // ? = optional Character (entweder der eine oder der andere ODER KEINER!!!!)
-re = /gra?e?y\?/i; // \ = escape Character 
+// re = /^h/i; // ^ = must begin with
+// re = /rld$/i; // $ = must end with
+// re = /^hello$/i; // must begin AND end with
+// re = /h.llo/i; // . = matches any ONE Character
+// re = /h*llo/i; // * = matches any Character 0 or more times
+// re = /gra?e?y/i; // ? = optional Character (entweder der eine oder der andere ODER KEINER!!!!)
+// re = /gra?e?y\?/i; // \ = escape Character 
 
 
 //String to match
 //const str = 'Hello World';
 //const str = 'grey';
-const str = 'grey?';
+// const str = 'grey?';
+// Log results
+// const result = re.exec(str);
+// console.log(result);
+
+// function reTest(re, str) {
+//     if (re.test(str)) {
+//         console.log(`${str} matched ${re.source}`);
+//     } else {
+//         console.log(`${str} does NOT match ${re.source}`);
+//     }
+// }
+
+// reTest(re, str);
+
+// ---------------------- Character Sets & Qualifiers -------------------------
+
+let re;
+
+// Brackets [] - Character Sets
+re = /gr[ae]y/i; // must be an a or e
+re = /[GF]ray/; // must be an G or F
+re = /[^GF]ray/i; // must be anything except for a G or F (^ inside brackets means NOT)
+re = /^[GF]ray/i; // must beginn with G or F (^ outside brackets means starts With)
+re = /[A-Z]ray/; // Match ANY uppercase letter
+re = /[A-Za-z]ray/; // Match ANY letter
+re = /[0-9]ray/; // Match ANY Digit
+
+// Braces {} - Quantifiers
+
+re =/Hel{2}o/i; // character before {} Must occur exactly {m} times
+re =/Hel{2,4}o/i; // {m,n} Must occur at least m and maximum n times
+re =/Hel{2,}o/i; // Must occur at least {m} times
+
+// Parenteses () Grouping
+
+re =/[0-9]x{3}/; // ohne () -> Digit und dann 3x
+re =/([0-9]x){3}/; // mit () -> Digit und dann x und das ganze 3 mal hintereinander
+
+// -------------- Shorthand Character Classes ------------------
+
+re = /\w/; // \w = Word Character = alphanumeric Char any letter, any number or _ (underscore)
+re = /\w+/; // + = one or more
+re = /\W/; // \W = NON-Word Character = anything but letter, number or _ (underscore)
+re = /\d/; // \d = Digit (first char)
+re = /\d+/; // \d+ = Digit (all chars)
+re = /\D/; // \D = NON-Digit
+re = /\s/; // \s = Whitespace (blank, tab)
+re = /\S/; // \S = NON-Whitespace (blank, tab)
+re = /Hell\b/i; // \b = Word Boundary (Wort muss danach aufhören Hello = kein Match, Hell = match)
+
+//---------------- Assertions -------------------
+
+re = /x(?=y)/; // Match "x" ONLY if its followed by "y"
+re = /x(?!y)/; // Match "x" ONLY if its NOT followed by "y"
+
+//String to match
+const str = 'xsys';
+
 // Log results
 const result = re.exec(str);
 console.log(result);
@@ -72,4 +130,3 @@ function reTest(re, str) {
 }
 
 reTest(re, str);
-
